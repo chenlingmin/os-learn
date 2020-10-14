@@ -2,3 +2,4 @@
 bochsout.txt
 *.img
 *.bin
+*.lock
