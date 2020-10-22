@@ -4,3 +4,4 @@ bochsout.txt
 *.bin
 *.lock
 *.o
+build/
