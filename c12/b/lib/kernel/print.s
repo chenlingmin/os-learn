@@ -117,8 +117,8 @@ put_char:
 .roll_screen:                   ;若超出屏幕大小，开始滚屏
     cld
     mov ecx, 960                ;一共有2000-80=1920个字符要搬运,共1920*2=3840字节.一次搬4字节,共3840/4=960次
-    mov esi, 0xb80a0            ;第1行行首
-    mov edi, 0xb8000            ;第0行行首
+    mov esi, 0xc00b80a0            ;第1行行首
+    mov edi, 0xc00b8000            ;第0行行首
     rep movsd
 
     ;将最后一行填充为空白
