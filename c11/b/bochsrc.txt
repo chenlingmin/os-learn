@@ -1,0 +1,27 @@
+megs: 32
+
+# 设置BIOS镜像
+romimage: file=$BXSHARE/BIOS-bochs-latest
+
+# 设置VGA BIOS镜像
+vgaromimage: file=$BXSHARE/VGABIOS-lgpl-latest
+
+
+#floppya: 1_44=hd60M.img, status=inserted
+
+# 设置从硬盘启动
+boot: disk
+
+# 设置日志文件
+log: bochsout.txt
+
+# 关闭鼠标
+mouse: enabled=0
+
+# 打开键盘
+keyboard: type=mf, serial_delay=250
+
+# 设置硬盘
+ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14
+ata0-master: type=disk, path="../../hd60M.img", mode=flat, cylinders=121, heads=16, spt=63
+
