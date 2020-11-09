@@ -279,6 +279,7 @@ void* sys_malloc(uint32_t size) {
             a->cnt = page_cnt;
             a->large = true;
             lock_release(&mem_pool->lock);
+            return (void*)(a + 1);		 // 跨过arena大小，把剩下的内存返回
         } else {
             lock_release(&mem_pool->lock);
             return NULL;
