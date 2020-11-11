@@ -9,3 +9,9 @@ brew install bochs
 brew install i386-elf-gcc
 brew install i386-elf-binutils
 ```
+
+```
+# 创建硬盘
+bximage -hd=60M -mode=create hd60M.img
+
+```
