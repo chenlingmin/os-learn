@@ -55,7 +55,7 @@ uint32_t vsprintf(char* str, const char* format, va_list ap) {
                     arg_int = 0 - arg_int;
                     *(buf_ptr++) = '-';
                 }
-                itoa(arg_int, &buf_ptr, 16);
+                itoa(arg_int, &buf_ptr, 10);
                 index_char = *(++index_ptr);
             break;
             case 'x':
