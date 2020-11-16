@@ -303,7 +303,7 @@ static void partition_scan(struct disk* hd, uint32_t ext_lba) {
                 hd->logic_parts[l_no].sec_cnt = p->sec_cnt;
                 hd->logic_parts[l_no].my_disk = hd;
                 list_append(&partition_list, &hd->logic_parts[l_no].part_tag);
-                sprintf(hd->logic_parts[l_no].name, "%s%d", hd->name, l_no + 1);    // 逻辑分区数字是从5开始,主分区是1～4.
+                sprintf(hd->logic_parts[l_no].name, "%s%d", hd->name, l_no + 5);    // 逻辑分区数字是从5开始,主分区是1～4.
                 l_no++;
                 if (l_no >= 8) {   // 只支持8个逻辑分区,避免数组越界
                     return;
