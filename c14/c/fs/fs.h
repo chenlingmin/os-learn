@@ -15,5 +15,8 @@ enum file_types {
     FT_DIRECTORY    // 目录
 };
 
+extern struct partition* cur_part;
 void filesys_init(void);
+int32_t path_depth_cnt(char* pathname);
+int32_t sys_open(const char* pathname, uint8_t flags);
 #endif
