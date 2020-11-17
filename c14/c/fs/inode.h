@@ -17,4 +17,6 @@ struct inode {
     uint32_t i_sectors[13];
     struct list_elem inode_tag;
 };
+
+void inode_sysc(struct partition* part, struct inode* inode, void* io_buf);
 #endif
