@@ -1,7 +1,7 @@
 #include "file.h"
 #include "fs.h"
 #include "super_block.h"
-#include "indoe.h"
+#include "inode.h"
 #include "stdio-kernel.h"
 #include "memory.h"
 #include "debug.h"
@@ -38,7 +38,7 @@ int32_t pcb_fd_install(int32_t global_fd_idx) {
     uint8_t local_fd_idx = 3;
     while (local_fd_idx < MAX_FILES_OPEN_PER_PROC) {
         if (cur->fd_table[local_fd_idx] == -1) { // -1表示free_slot,可用
-            cur->fd_table[local_fd_idx] = global_fd_idx
+            cur->fd_table[local_fd_idx] = global_fd_idx;
             break;
         }
         local_fd_idx++;

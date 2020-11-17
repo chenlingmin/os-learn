@@ -40,7 +40,7 @@ static void inode_locate(struct partition* part, uint32_t inode_no, struct inode
     inode_pos->off_size = off_size_in_sec;
 }
 /* 将inode写入到分区part */
-void inode_sysc(struct partition* part, struct inode* inode, void* io_buf) {    // io_buf是用于硬盘io的缓冲区
+void inode_sync(struct partition* part, struct inode* inode, void* io_buf) {    // io_buf是用于硬盘io的缓冲区
     uint8_t inode_no = inode->i_no;
     struct inode_position inode_pos;
     inode_locate(part, inode_no, &inode_pos);   // inode位置信息会存入inode_pos
@@ -94,7 +94,7 @@ struct inode* inode_open(struct partition* part, uint32_t inode_no) {
     /* 为使通过sys_malloc创建的新inode被所有任务共享,
      * 需要将inode置于内核空间,故需要临时
      * 将cur_pbc->pgdir置为NULL */
-    struct task_start* cur = running_thread();
+    struct task_struct* cur = running_thread();
     uint32_t* cur_pagedir_bak = cur->pgdir;
     cur->pgdir = NULL;
     /* 以上三行代码完成后下面分配的内存将位于内核区 */
@@ -103,7 +103,7 @@ struct inode* inode_open(struct partition* part, uint32_t inode_no) {
     cur->pgdir = cur_pagedir_bak;
 
     char* inode_buf;
-    if (inode_pos.tow_sec) { // 考虑跨扇区的情况
+    if (inode_pos.two_sec) { // 考虑跨扇区的情况
         inode_buf = (char*)sys_malloc(SECTOR_SIZE * 2);
         /* i结点表是被partition_format函数连续写入扇区的,
          * 所以下面可以连续读出来 */
