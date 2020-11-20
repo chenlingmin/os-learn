@@ -280,9 +280,9 @@ bool delete_dir_entry(struct partition* part, struct dir* pdir, uint32_t inode_n
             } else {    // 在一级间接索引表中擦除该间接块地址
                 /*先判断一级间接索引表中间接块的数量,如果仅有这1个间接块,连同间接索引表所在的块一同回收 */
                 uint32_t indirect_blocks = 0;
-                uint32_t indirect_blocks_idx = 12;
-                while (indirect_blocks_idx < 140) {
-                    if (all_blocks[indirect_blocks_idx] != 0) {
+                uint32_t indirect_block_idx = 12;
+                while (indirect_block_idx < 140) {
+                    if (all_blocks[indirect_block_idx] != 0) {
                         indirect_blocks++;
                     }
                 }

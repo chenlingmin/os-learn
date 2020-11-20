@@ -212,7 +212,7 @@ static char* path_parse(char* pathname, char* name_store) {
 }
 
 /* 返回路径深度,比如/a/b/c,深度为3 */
-int32_t path_dept_cnt(char* pathname) {
+int32_t path_depth_cnt(char* pathname) {
     ASSERT(pathname != NULL);
     char* p = pathname;
     char name[MAX_FILE_NAME_LEN];   // 用于path_parse的参数做路径解析
@@ -311,7 +311,7 @@ int32_t sys_open(const char* pathname, uint8_t flags) {
     memset(&searched_record, 0, sizeof(struct path_search_record));
 
     /* 记录目录深度.帮助判断中间某个目录不存在的情况 */
-    uint32_t pathname_depth = path_dept_cnt((char*)pathname);
+    uint32_t pathname_depth = path_depth_cnt((char*)pathname);
 
     /* 先检查文件是否存在 */
     int inode_no = search_file(pathname, &searched_record);
@@ -323,7 +323,7 @@ int32_t sys_open(const char* pathname, uint8_t flags) {
         return -1;
     }
 
-    uint32_t path_searched_depth = path_dept_cnt(searched_record.searched_path);
+    uint32_t path_searched_depth = path_depth_cnt(searched_record.searched_path);
 
     /* 先判断是否把pathname的各层目录都访问到了,即是否在某个中间目录就失败了 */
     if (pathname_depth != path_searched_depth) {    // 说明并没有访问到全部的路径,某个中间目录是不存在的
