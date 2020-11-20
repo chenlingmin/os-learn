@@ -98,7 +98,7 @@ struct inode* inode_open(struct partition* part, uint32_t inode_no) {
     uint32_t* cur_pagedir_bak = cur->pgdir;
     cur->pgdir = NULL;
     /* 以上三行代码完成后下面分配的内存将位于内核区 */
-    inode_found = (struct node*)sys_malloc(sizeof(struct inode));
+    inode_found = (struct inode*)sys_malloc(sizeof(struct inode));
     /* 恢复pgdir */
     cur->pgdir = cur_pagedir_bak;
 
@@ -140,7 +140,7 @@ void inode_close(struct inode* inode) {
     intr_set_status(old_status);
 }
 
-/* 关闭inode或减少inode的打开数 */
+/* 将硬盘分区part上的inode清空 */
 void inode_delete(struct partition* part, uint32_t inode_no, void* io_buf) {
     ASSERT(inode_no < MAX_FILES_PER_PART);
     struct inode_position inode_pos;

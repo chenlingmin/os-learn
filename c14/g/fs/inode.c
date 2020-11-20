@@ -98,7 +98,7 @@ struct inode* inode_open(struct partition* part, uint32_t inode_no) {
     uint32_t* cur_pagedir_bak = cur->pgdir;
     cur->pgdir = NULL;
     /* 以上三行代码完成后下面分配的内存将位于内核区 */
-    inode_found = (struct node*)sys_malloc(sizeof(struct inode));
+    inode_found = (struct inode*)sys_malloc(sizeof(struct inode));
     /* 恢复pgdir */
     cur->pgdir = cur_pagedir_bak;
 
