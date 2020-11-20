@@ -25,7 +25,7 @@ int32_t get_free_slot_in_global(void) {
         fd_idx++;
     }
     if (fd_idx == MAX_FILE_OPEN) {
-        printk("execeed max open files\n");
+        printk("exceed max open files\n");
         return -1;
     }
 }
@@ -44,7 +44,7 @@ int32_t pcb_fd_install(int32_t global_fd_idx) {
         local_fd_idx++;
     }
     if (local_fd_idx == MAX_FILES_OPEN_PER_PROC) {
-        printk("execeed max open files_per_proc\n");
+        printk("exceed max open files_per_proc\n");
         return -1;
     }
     return local_fd_idx;
@@ -84,10 +84,9 @@ void bitmap_sync(struct partition* part, uint32_t bit_idx, uint8_t btmp_type) {
             sec_lba = part->sb->inode_bitmap_lba + off_sec;
             bitmap_off = part->inode_bitmap.bits + off_size;
         break;
-
+        case BLOCK_BITMAP:
             sec_lba = part->sb->block_bitmap_lba + off_sec;
             bitmap_off = part->block_bitmap.bits + off_size;
-        case BLOCK_BITMAP:
         break;
     }
     ide_write(part->my_disk, sec_lba, bitmap_off, 1);
