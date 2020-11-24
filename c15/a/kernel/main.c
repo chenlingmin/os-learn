@@ -30,4 +30,5 @@ void init(void) {
     } else {
         printf("i am child, my pid is %d, ret pid is %d\n", getpid(), ret_pid);
     }
+    while(1);
 }
