@@ -102,7 +102,7 @@ static void partition_format(struct partition* part) {
      ********************************************/
     /* 准备写inode_table中的第0项,即根目录所在的inode */
     memset(buf, 0, buf_size);   // 先清空缓冲区
-    struct inode* i = (struct inode*)buf_size;
+    struct inode* i = (struct inode*)buf;
     i->i_size = sb.dir_entry_size * 2;  // . 和 ..
     i->i_no = 0;    // 根目录占inode数组中第0个inode
     i->i_sectors[0] = sb.data_start_lba;    // 由于上面的memset,i_sectors数组的其它元素都初始化为0

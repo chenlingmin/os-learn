@@ -161,7 +161,7 @@ static void partition_format(struct partition* part) {
      ********************************************/
     /* 准备写inode_table中的第0项,即根目录所在的inode */
     memset(buf, 0, buf_size);   // 先清空缓冲区
-    struct inode* i = (struct inode*)buf_size;
+    struct inode* i = (struct inode*)buf;
     i->i_size = sb.dir_entry_size * 2;  // . 和 ..
     i->i_no = 0;    // 根目录占inode数组中第0个inode
     i->i_sectors[0] = sb.data_start_lba;    // 由于上面的memset,i_sectors数组的其它元素都初始化为0
@@ -605,7 +605,7 @@ int32_t sys_mkdir(const char* pathname) {
 rollback:   // 因为某步骤操作失败而回滚
     switch (rollback_step) {
         case 2:
-            bitmap_set(&cur_part->inode_bitmap, inode_no, 1);   // 如果新文件的inode创建失败,之前位图中分配的inode_no也要恢复
+            bitmap_set(&cur_part->inode_bitmap, inode_no, 0);   // 如果新文件的inode创建失败,之前位图中分配的inode_no也要恢复
         case 1:
             /* 关闭所创建目录的父目录 */
             dir_close(searched_record.parent_dir);
