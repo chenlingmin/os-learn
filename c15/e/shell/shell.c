@@ -133,9 +133,11 @@ void my_shell(void) {
             continue;
         }
 
+        char buf[MAX_PATH_LEN] = {0};
         int32_t arg_idx = 0;
         while (arg_idx < argc) {
-            printf("%s ", argv[arg_idx]);
+            make_clear_abs_path(argv[arg_idx], buf);
+            printf("%s -> %s\n", argv[arg_idx], buf);
             arg_idx++;
         }
         printf("\n");
