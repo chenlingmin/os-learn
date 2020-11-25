@@ -24,7 +24,7 @@ static void wash_path(char* old_abs_path, char* new_abs_path) {
     while (name[0]) {
         /* 如果是上一级目录“..” */
         if (!strcmp("..", name)) {
-            char* slash_ptr = strrchr(new_abs_path, "/");
+            char* slash_ptr = strrchr(new_abs_path, '/');
             /*如果未到new_abs_path中的顶层目录,就将最右边的'/'替换为0,
              *这样便去除了new_abs_path中最后一层路径,相当于到了上一级目录 */
             if (slash_ptr != new_abs_path) {    // 如new_abs_path为“/a/b”,".."之后则变为“/a”
