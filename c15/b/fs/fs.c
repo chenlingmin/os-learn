@@ -79,7 +79,7 @@ static void partition_format(struct partition* part) {
     uint32_t boot_sector_sects = 1;
     uint32_t super_block_sects = 1;
     uint32_t inode_bitmap_sects = DIV_ROUND_UP(MAX_FILES_PER_PART, BITS_PER_SECTOR);    // I结点位图占用的扇区数.最多支持4096个文件
-    uint32_t inode_table_sects  = DIV_ROUND_UP(((sizeof(struct inode)) * MAX_FILES_PER_PART), SECTOR_SIZE);
+    uint32_t inode_table_sects  = DIV_ROUND_UP(((sizeof(struct inode) * MAX_FILES_PER_PART)), SECTOR_SIZE);
     uint32_t used_sects = boot_sector_sects + super_block_sects + inode_bitmap_sects + inode_table_sects;
     uint32_t free_sects = part->sec_cnt - used_sects;
 
@@ -634,7 +634,7 @@ rollback:   // 因为某步骤操作失败而回滚
 struct dir* sys_opendir(const char* name) {
     ASSERT(strlen(name) < MAX_PATH_LEN);
     /* 如果是根目录'/',直接返回&root_dir */
-    if (name[0] == '/' && (name[1] == 0 || name[1] == '.')) {
+    if (name[0] == '/' && (name[1] == 0 || name[0] == '.')) {
         return &root_dir;
     }
 
@@ -781,6 +781,7 @@ char* sys_getcwd(char* buf, uint32_t size) {
     if (child_inode_nr == 0) {
         buf[0] = '/';
         buf[1] = 0;
+        sys_free(io_buf);
         return buf;
     }
 

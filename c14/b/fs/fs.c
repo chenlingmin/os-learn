@@ -76,7 +76,7 @@ static void partition_format(struct partition* part) {
     uint32_t boot_sector_sects = 1;
     uint32_t super_block_sects = 1;
     uint32_t inode_bitmap_sects = DIV_ROUND_UP(MAX_FILES_PER_PART, BITS_PER_SECTOR);    // I结点位图占用的扇区数.最多支持4096个文件
-    uint32_t inode_table_sects  = DIV_ROUND_UP(((sizeof(struct inode)) * MAX_FILES_PER_PART), SECTOR_SIZE);
+    uint32_t inode_table_sects  = DIV_ROUND_UP(((sizeof(struct inode) * MAX_FILES_PER_PART)), SECTOR_SIZE);
     uint32_t used_sects = boot_sector_sects + super_block_sects + inode_bitmap_sects + inode_table_sects;
     uint32_t free_sects = part->sec_cnt - used_sects;
 
