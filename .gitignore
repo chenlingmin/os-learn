@@ -3,5 +3,9 @@ bochsout.txt
 *.img
 *.bin
 *.lock
+*.a
 *.o
 build/
+c15/g/command/prog_no_arg
+c15/h/command/prog_no_arg
+c15/h/command/prog_arg
