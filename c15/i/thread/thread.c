@@ -251,7 +251,7 @@ static void pad_print(char* buf, int32_t buf_len, void* ptr, char format) {
         case 'd':
             out_pad_0idx = sprintf(buf, "%d", *((int16_t*)ptr));
         case 'x':
-            out_pad_0idx = sprintf(buf, "%d", *((uint32_t*)ptr));
+            out_pad_0idx = sprintf(buf, "%x", *((uint32_t*)ptr));
     }
     while (out_pad_0idx < buf_len) {    // 以空格填充
         buf[out_pad_0idx] = ' ';
@@ -366,7 +366,7 @@ void thread_init(void) {
 
     list_init(&thread_ready_list);
     list_init(&thread_all_list);
-    lock_init(&pid_pool.pid_lock);
+    pid_pool_init();
 
     /* 先创建第一个用户进程:init */
     process_execute(init, "init");  // 放在第一个初始化,这是第一个进程,init进程的pid为1
