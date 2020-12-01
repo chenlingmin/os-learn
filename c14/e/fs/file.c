@@ -28,6 +28,7 @@ int32_t get_free_slot_in_global(void) {
         printk("exceed max open files\n");
         return -1;
     }
+    return fd_idx;
 }
 
 
