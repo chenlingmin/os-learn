@@ -191,7 +191,7 @@ void my_shell(void) {
 
             /*2 第一个命令 */
             char* each_cmd = cmd_line;
-            pipe_symbol = strchr(each_cmd, '1');
+            pipe_symbol = strchr(each_cmd, '|');
             *pipe_symbol = 0;
 
             /* 执行第一个命令,命令的输出会写入环形缓冲区 */

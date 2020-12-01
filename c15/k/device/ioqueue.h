@@ -4,7 +4,7 @@
 #include "thread.h"
 #include "sync.h"
 
-#define bufsize 64
+#define bufsize 2048
 
 /* 环形队列 */
 struct ioqueue {
