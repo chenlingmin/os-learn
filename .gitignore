@@ -6,7 +6,7 @@ bochsout.txt
 *.a
 *.o
 build/
-c15/g/command/prog_no_arg
-c15/h/command/prog_no_arg
-c15/h/command/prog_arg
-c15/i/command/cat
+**/command/prog_no_arg
+**/command/prog_arg
+**/command/cat
+**/command/prog_pipe
